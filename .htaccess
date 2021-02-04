@@ -1,0 +1,10 @@
+Options -Indexes 
+RewriteEngine on
+
+DirectoryIndex index.php
+
+RewriteRule ^anket$ index.php?language=tr [L,QSA]
+RewriteRule ^poll$ index.php?language=en [L,QSA]
+RewriteRule ^save-poll-tr$ save-poll.php?language=tr [L,QSA]
+RewriteRule ^save-poll-en$ save-poll.php?language=en [L,QSA]
+

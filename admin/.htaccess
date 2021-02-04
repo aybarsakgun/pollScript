@@ -1,0 +1,20 @@
+Options -Indexes 
+RewriteEngine on
+ErrorDocument 404 /pollScript/admin/index.php
+
+DirectoryIndex index.php?pr=home
+
+RewriteRule ^login$ login.php [L,QSA]
+RewriteRule ^logout$ ajax.php?pr=logout [L,QSA]
+
+RewriteRule ^home$ index.php?pr=home [L,QSA]
+RewriteRule ^access-logs$ ajax.php?pr=access-logs [L,QSA]
+RewriteRule ^poll-answers$ ajax.php?pr=poll-answers [L,QSA]
+
+RewriteRule ^send-mail$ ajax.php?pr=send-mail [L,QSA]
+
+RewriteRule ^export-xls-tr$ ajax.php?pr=export-xls&language=tr [L,QSA]
+RewriteRule ^export-xls-en$ ajax.php?pr=export-xls&language=en [L,QSA]
+
+RewriteRule ^export-csv-tr ajax.php?pr=export-csv&language=tr [L,QSA]
+RewriteRule ^export-csv-en$ ajax.php?pr=export-csv&language=en [L,QSA]
