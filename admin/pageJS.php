@@ -301,5 +301,88 @@
             }
         });
     }
+    function toggleVisibility(_this, input) {
+        if (input.attr('type') === 'password') {
+            input.attr('type', 'text');
+            $(_this).text('visibility_off');
+        } else {
+            input.attr('type', 'password');
+            $(_this).text('visibility');
+        }
+    }
+    $("#passwordVisibilityChanger").on('click', function(e) {
+        toggleVisibility(this, $('#password'));
+    });
+    $("#passwordVerifyVisibilityChanger").on('click', function(e) {
+        toggleVisibility(this, $('#passwordVerify'));
+    });
+    $("#profileSettingsForm").on('submit',(function(e)
+    {
+        e.preventDefault();
+
+        $("#result").empty();
+
+        $('#editProfileButton').prop('disabled', true);
+        $('#editProfileButton').html("Kaydediliyor...");
+
+
+        var password = $("#password").val();
+        var passwordVerify = $("#passwordVerify").val();
+
+        if(password.length > 0)
+        {
+            if(password.length < 6 || password.length > 29)
+            {
+                $("#result").html("<div class='alert alert-danger'>Yeni şifreniz en az 6 karakter, en fazla 30 karakterden oluşabilir.</div>");
+                $('#editProfileButton').prop('disabled', false);
+                $('#editProfileButton').html("Kaydet");
+                $("#password").val("");
+                $("#passwordVerify").val("");
+                return false;
+            }
+        }
+        if(password.length > 0 && passwordVerify.length > 0)
+        {
+            if (password != passwordVerify)
+            {
+                $("#result").html("<div class='alert alert-danger'>Girdiğiniz şifreler birbirleriyle eşleşmiyor.</div>");
+                $('#editProfileButton').prop('disabled', false);
+                $('#editProfileButton').html("Edit User");
+                $("#password").val("");
+                $("#passwordVerify").val("");
+                return false;
+            }
+        }
+
+        $.ajax({
+            url: "edit-profile-a",
+            type: "POST",
+            data:  new FormData(this),
+            dataType: 'json',
+            contentType: false,
+            cache: false,
+            processData:false,
+            headers : {
+                'csrftoken': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data)
+            {
+                if(data.success) {
+                    if (data.isPasswordChanged) {
+                        $("#result").html("<div class='alert alert-success'>Profil ayarlarınız başarıyla kaydedildi. Şifrenizi değiştirdiğiniz için tekrardan giriş ekranına yönlendiriliyorsunuz...</div>");
+                        setTimeout(function () { window.location.href = 'home'; }, 3000);
+                    } else {
+                        $("#result").html("<div class='alert alert-success'>Profil ayarlarınız başarıyla kaydedildi.</div>");
+                    }
+                    $("#password").val("");
+                    $("#passwordVerify").val("");
+                } else {
+                    $("#result").html("<div class='alert alert-danger'>" + data.message + "</div>");
+                }
+                $('#editProfileButton').prop('disabled', false);
+                $('#editProfileButton').html("Kaydet");
+            }
+        });
+    }));
 </script>
 <?php } ?>

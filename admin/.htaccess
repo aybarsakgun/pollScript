@@ -18,3 +18,5 @@ RewriteRule ^export-xls-en$ ajax.php?pr=export-xls&language=en [L,QSA]
 
 RewriteRule ^export-csv-tr ajax.php?pr=export-csv&language=tr [L,QSA]
 RewriteRule ^export-csv-en$ ajax.php?pr=export-csv&language=en [L,QSA]
+
+RewriteRule ^edit-profile-a$ ajax.php?pr=edit-profile [L,QSA]

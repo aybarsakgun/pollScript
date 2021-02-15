@@ -561,6 +561,27 @@ if(isset($pageRequest))
         }
 
         fclose($output);
+    } else if ($pageRequest == 'edit-profile') {
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $additionalSQL = '';
+        if(!empty($_POST["password"]) && !empty($_POST["passwordVerify"]))
+        {
+            $newPassword = $_POST['passwordVerify'];
+            $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+            $additionalSQL = ', password = :password';
+        }
+        $updateUser = $DB_con->prepare('UPDATE users SET name = :name, username = :username ' . $additionalSQL . ' WHERE id = :id');
+        if ($updateUser->execute(empty($additionalSQL) ? array(':name' => $name, ':username' => $username, ':id' => loginCheck($DB_con)) : array(':name' => $name, ':username' => $username, ':password' => $newHashedPassword, ':id' => loginCheck($DB_con)))) {
+            die(json_encode([
+                'success' => true,
+                'message' => 'Success',
+                'code' => 200,
+                'isPasswordChanged' => !empty($additionalSQL)
+            ]));
+        } else {
+            die(result(500, 'Teknik bir hata oluştu. Lütfen daha sonra tekrar deneyin.'));
+        }
     }
 } else {
     die(result(404, 'Security'));

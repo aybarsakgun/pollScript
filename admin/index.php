@@ -94,6 +94,12 @@ if (!in_array($pageRequest, $existPages)) {
                 </div>
                 <div class="menu">
                     <ul class="list">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#profileSettingsModal">
+                                <i class="material-icons">settings</i>
+                                <span>Profil Ayarları</span>
+                            </a>
+                        </li>
                         <li class="<?php if ($pageRequest == 'home') { ?>active<?php } ?>">
                             <a href="home">
                                 <i class="material-icons">home</i>
@@ -267,6 +273,67 @@ if (!in_array($pageRequest, $existPages)) {
                                             </div>
                                             <p id="pollLinkEnSentResult" style="display:none;"></p>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Kapat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="profileSettingsModal" tabindex="-1" role="dialog" style="display: none;">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Profil Ayarları</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <form id="profileSettingsForm">
+                                            <div class="col-xs-12">
+                                                <input type="hidden" name="id" value="<?=$user['id']?>">
+                                                <label for="username">Kullanıcı Adı</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" id="username" name="username" class="form-control" value="<?=$user['username']?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <label for="name">Ad</label>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" id="name" name="name" class="form-control" value="<?=$user['name']?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <label for="password">Şifre <small>(Şifrenizi değiştirmek istemiyorsanız boş bırakınız.)</small></label>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="password" id="password" name="password" class="form-control">
+                                                    </div>
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons" style="cursor:pointer;" id="passwordVisibilityChanger">visibility</i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <label for="passwordVerify">Şifre Tekrar</label>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="password" id="passwordVerify" name="passwordVerify" class="form-control">
+                                                    </div>
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons" style="cursor:pointer;" id="passwordVerifyVisibilityChanger">visibility</i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div id="result"></div>
+                                                <button type="submit" class="btn bg-<?=$app['themeColor']?> m-t-15 waves-effect" id="editProfileButton">Kaydet</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
