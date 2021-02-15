@@ -216,7 +216,17 @@
             if (answers) {
                 answersContent += '<div class="list-group">';
                 answers.split('|||').forEach(function(item, index) {
-                    answersContent += '<span class="list-group-item"><h4 class="list-group-item-heading">' + questions[index + 1]['question'][language] + '</h4><p class="list-group-item-text"><strong>Cevap: </strong>' + item + '</p></span>';
+                    if (questions[index + 1]['type'] === 'starring') {
+                        answersContent += '<span class="list-group-item"><h4 class="list-group-item-heading">' + questions[index + 1]['question'][language] + '</h4>';
+                        let i = 0;
+                        for (var subOption in questions[index + 1]['options'][language]) {
+                            answersContent += '<p class="list-group-item-text"><strong>' + subOption + ': </strong>' + (item.split(',')[i] && item.split(',')[i] !== '' ? (item.split(',')[i] + ' ' + (language === 'tr' ? 'Yıldız' : 'Star')) : '-')  + '</p>';
+                            i++;
+                        }
+                        answersContent += '</span>';
+                    } else {
+                        answersContent += '<span class="list-group-item"><h4 class="list-group-item-heading">' + questions[index + 1]['question'][language] + '</h4><p class="list-group-item-text"><strong>Cevap: </strong>' + item + '</p></span>';
+                    }
                 });
                 answersContent += '</div>';
             }

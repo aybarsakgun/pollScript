@@ -48,7 +48,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Sahip olduğunuz tekne türü',
-            'en' => 'Own boat type?'
+            'en' => 'Boat type that you own'
         ],
         'options' => [
             'tr' => [
@@ -56,8 +56,8 @@ $questions = [
                 'Motorlu'
             ],
             'en' => [
-                'Sailboat',
-                'Motorboat'
+                'Sailing',
+                'Motor'
             ],
         ]
     ],
@@ -70,7 +70,7 @@ $questions = [
         ],
         'question' => [
             'tr' => 'Sahip olduğunuz teknenin boyu',
-            'en' => 'The size of the boat you own?',
+            'en' => 'Boat length',
         ],
         'options' => [
             'tr' => array_values(range(1, 100)),
@@ -82,7 +82,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Firmamızı hangi kanaldan duydunuz veya öğrendiniz?',
-            'en' => 'From which channel did you hear or learn about our company?'
+            'en' => 'How did you find us?'
         ],
         'options' => [
             'tr' => [
@@ -92,10 +92,10 @@ $questions = [
                 'Fuarlar'
             ],
             'en' => [
-                'Journal etc.',
+                'Magazine, etc.',
                 'Internet',
                 'Advice',
-                'Fairs'
+                'Fair'
             ],
         ]
     ],
@@ -104,7 +104,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Kaç yıldır firmamızla beraber çalışıyorsunuz?',
-            'en' => 'How many years have you been working with our company?'
+            'en' => 'How long are you working with us?'
         ],
         'options' => [
             'tr' => [
@@ -139,13 +139,13 @@ $questions = [
                 'Diğer'
             ],
             'en' => [
-                'Elektrik/Tesisat',
-                'Torna/Kaynak',
-                'Döşeme/Yelken',
-                'Motor',
-                'Boyahane',
-                'Marangozhane',
-                'Diğer'
+                'Electric/Plumbing',
+                'Turning/Welding',
+                'Upholstery/Sails',
+                'Mechanics',
+                'Painting',
+                'Carpentry',
+                'Other'
             ],
         ]
     ],
@@ -154,7 +154,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Firmamıza, iletişim kanalları yardımı ile kolayca ulaşabilme',
-            'en' => 'Easy access to our company with the help of communication channels'
+            'en' => 'To be reached easily to our company by using any communication channels'
         ],
         'options' => [
             'tr' => [
@@ -165,7 +165,7 @@ $questions = [
             ],
             'en' => [
                 'Not Good',
-                'Not Bad',
+                'Normal',
                 'Good',
                 'Very Good'
             ],
@@ -176,7 +176,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Servis ziyaretlerinin taahhüt edildiği şekilde zamanında yerine getirilmesi',
-            'en' => 'Timely execution of service visits as promised'
+            'en' => 'To be fulfilled of service visits on time as promised'
         ],
         'options' => [
             'tr' => [
@@ -187,7 +187,7 @@ $questions = [
             ],
             'en' => [
                 'Not Good',
-                'Not Bad',
+                'Normal',
                 'Good',
                 'Very Good'
             ],
@@ -198,7 +198,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Bildirilen yazılı/sözlü servis taleplerinde, hızlı ve doğru tespitlerin yapılması',
-            'en' => ''
+            'en' => 'To be done quick and right determination for notified written/verbal service requests'
         ],
         'options' => [
             'tr' => [
@@ -209,7 +209,7 @@ $questions = [
             ],
             'en' => [
                 'Not Good',
-                'Not Bad',
+                'Normal',
                 'Good',
                 'Very Good'
             ],
@@ -220,7 +220,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Servis öncesinde, yapılacak işlemler hakkında bilginin tarafınıza net olarak verilmesi',
-            'en' => ''
+            'en' => 'To be given information clearly about works which will be executed, before the service'
         ],
         'options' => [
             'tr' => [
@@ -231,7 +231,7 @@ $questions = [
             ],
             'en' => [
                 'Not Good',
-                'Not Bad',
+                'Normal',
                 'Good',
                 'Very Good'
             ],
@@ -242,7 +242,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Talep edilen sorunların, çözüme kavuşturma derecesi',
-            'en' => ''
+            'en' => 'Degree of resolving problems which were requested'
         ],
         'options' => [
             'tr' => [
@@ -253,7 +253,7 @@ $questions = [
             ],
             'en' => [
                 'Not Good',
-                'Not Bad',
+                'Normal',
                 'Good',
                 'Very Good'
             ],
@@ -264,7 +264,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Servis sonrasında, yazılı/sözlü raporların tarafınıza net olarak sunulması',
-            'en' => ''
+            'en' => 'To be provided you with written/verbal reports clearly, after the service'
         ],
         'options' => [
             'tr' => [
@@ -275,7 +275,7 @@ $questions = [
             ],
             'en' => [
                 'Not Good',
-                'Not Bad',
+                'Normal',
                 'Good',
                 'Very Good'
             ],
@@ -283,111 +283,141 @@ $questions = [
     ],
     13 => [
         'name' => 'question_13',
-        'type' => 'radio',
+        'type' => 'starring',
         'question' => [
             'tr' => 'Firma Yetkilisinin/Servis Personelinin size olan yaklaşımı ve iletişimi',
-            'en' => ''
+            'en' => 'Approch of our Authorized Person/Service Personnel to you, and communication with you'
         ],
         'options' => [
             'tr' => [
-                'İyi Değil',
-                'Orta',
-                'İyi',
-                'Çok İyi'
+                'Ofis/Ön Büro' => array_values(range(1, 5)),
+                'Elektrik/Tesisat' => array_values(range(1, 5)),
+                'Torna/Kaynak' => array_values(range(1, 5)),
+                'Döşeme/Yelken' => array_values(range(1, 5)),
+                'Motor Atölyesi' => array_values(range(1, 5)),
+                'Boyahane' => array_values(range(1, 5)),
+                'Marangozhane' => array_values(range(1, 5))
             ],
             'en' => [
-                'Not Good',
-                'Not Bad',
-                'Good',
-                'Very Good'
+                'Office' => array_values(range(1, 5)),
+                'Electric/Plumbing' => array_values(range(1, 5)),
+                'Turning/Welding' => array_values(range(1, 5)),
+                'Upholstery/Sails' => array_values(range(1, 5)),
+                'Mechanics' => array_values(range(1, 5)),
+                'Painting' => array_values(range(1, 5)),
+                'Carpentry' => array_values(range(1, 5))
             ],
         ]
     ],
     14 => [
         'name' => 'question_14',
-        'type' => 'radio',
+        'type' => 'starring',
         'question' => [
             'tr' => 'Firma Yetkilisinin/Servis Personelinin dış görünüşlerine gösterdikleri özen',
-            'en' => ''
+            'en' => 'Our Authorized Person/Service Personnel to pay attention to their appearance'
         ],
         'options' => [
             'tr' => [
-                'İyi Değil',
-                'Orta',
-                'İyi',
-                'Çok İyi'
+                'Ofis/Ön Büro' => array_values(range(1, 5)),
+                'Elektrik/Tesisat' => array_values(range(1, 5)),
+                'Torna/Kaynak' => array_values(range(1, 5)),
+                'Döşeme/Yelken' => array_values(range(1, 5)),
+                'Motor Atölyesi' => array_values(range(1, 5)),
+                'Boyahane' => array_values(range(1, 5)),
+                'Marangozhane' => array_values(range(1, 5))
             ],
             'en' => [
-                'Not Good',
-                'Not Bad',
-                'Good',
-                'Very Good'
+                'Office' => array_values(range(1, 5)),
+                'Electric/Plumbing' => array_values(range(1, 5)),
+                'Turning/Welding' => array_values(range(1, 5)),
+                'Upholstery/Sails' => array_values(range(1, 5)),
+                'Mechanics' => array_values(range(1, 5)),
+                'Painting' => array_values(range(1, 5)),
+                'Carpentry' => array_values(range(1, 5))
             ],
         ]
     ],
     15 => [
         'name' => 'question_15',
-        'type' => 'radio',
+        'type' => 'starring',
         'question' => [
             'tr' => 'Teknisyenin servis sırasında çalışma bölgesinde dikkatli ve temiz olması',
-            'en' => ''
+            'en' => 'The technicians attention and care in the working area during service'
         ],
         'options' => [
             'tr' => [
-                'İyi Değil',
-                'Orta',
-                'İyi',
-                'Çok İyi'
+//                'Ofis/Ön Büro' => array_values(range(1, 5)),
+                'Elektrik/Tesisat' => array_values(range(1, 5)),
+                'Torna/Kaynak' => array_values(range(1, 5)),
+                'Döşeme/Yelken' => array_values(range(1, 5)),
+                'Motor Atölyesi' => array_values(range(1, 5)),
+                'Boyahane' => array_values(range(1, 5)),
+                'Marangozhane' => array_values(range(1, 5))
             ],
             'en' => [
-                'Not Good',
-                'Not Bad',
-                'Good',
-                'Very Good'
+//                'Office' => array_values(range(1, 5)),
+                'Electric/Plumbing' => array_values(range(1, 5)),
+                'Turning/Welding' => array_values(range(1, 5)),
+                'Upholstery/Sails' => array_values(range(1, 5)),
+                'Mechanics' => array_values(range(1, 5)),
+                'Painting' => array_values(range(1, 5)),
+                'Carpentry' => array_values(range(1, 5))
             ],
         ]
     ],
     16 => [
         'name' => 'question_16',
-        'type' => 'radio',
+        'type' => 'starring',
         'question' => [
             'tr' => 'Teknisyenin, servis konularında teknik bilgi yeterliliği',
-            'en' => ''
+            'en' => 'Competence for technical knowledge of technician in service matters'
         ],
         'options' => [
             'tr' => [
-                'İyi Değil',
-                'Orta',
-                'İyi',
-                'Çok İyi'
+//                'Ofis/Ön Büro' => array_values(range(1, 5)),
+                'Elektrik/Tesisat' => array_values(range(1, 5)),
+                'Torna/Kaynak' => array_values(range(1, 5)),
+                'Döşeme/Yelken' => array_values(range(1, 5)),
+                'Motor Atölyesi' => array_values(range(1, 5)),
+                'Boyahane' => array_values(range(1, 5)),
+                'Marangozhane' => array_values(range(1, 5))
             ],
             'en' => [
-                'Not Good',
-                'Not Bad',
-                'Good',
-                'Very Good'
+//                'Office' => array_values(range(1, 5)),
+                'Electric/Plumbing' => array_values(range(1, 5)),
+                'Turning/Welding' => array_values(range(1, 5)),
+                'Upholstery/Sails' => array_values(range(1, 5)),
+                'Mechanics' => array_values(range(1, 5)),
+                'Painting' => array_values(range(1, 5)),
+                'Carpentry' => array_values(range(1, 5))
             ],
         ]
     ],
     17 => [
         'name' => 'question_17',
-        'type' => 'radio',
+        'type' => 'starring',
         'question' => [
             'tr' => 'Teknisyenin, sorunları belirleme/çözmedeki becerisi',
-            'en' => ''
+            'en' => 'Skill of the technician in identifying/solving problems'
         ],
         'options' => [
             'tr' => [
-                'İyi Değil',
-                'Orta',
-                'İyi',
-                'Çok İyi'
+//                'Ofis/Ön Büro' => array_values(range(1, 5)),
+                'Elektrik/Tesisat' => array_values(range(1, 5)),
+                'Torna/Kaynak' => array_values(range(1, 5)),
+                'Döşeme/Yelken' => array_values(range(1, 5)),
+                'Motor Atölyesi' => array_values(range(1, 5)),
+                'Boyahane' => array_values(range(1, 5)),
+                'Marangozhane' => array_values(range(1, 5))
             ],
             'en' => [
-                'Not Good',
-                'Not Bad',
-                'Good',
-                'Very Good'
+//                'Office' => array_values(range(1, 5)),
+                'Electric/Plumbing' => array_values(range(1, 5)),
+                'Turning/Welding' => array_values(range(1, 5)),
+                'Upholstery/Sails' => array_values(range(1, 5)),
+                'Mechanics' => array_values(range(1, 5)),
+                'Painting' => array_values(range(1, 5)),
+                'Carpentry' => array_values(range(1, 5))
             ],
         ]
     ],
@@ -396,7 +426,7 @@ $questions = [
         'type' => 'radio',
         'question' => [
             'tr' => 'Firmamızdan aldığınız servisten genel olarak memnuniyetiniz',
-            'en' => ''
+            'en' => 'Overall, how satisfied are you with us, after the service?'
         ],
         'options' => [
             'tr' => [
@@ -407,7 +437,7 @@ $questions = [
             ],
             'en' => [
                 'Not Good',
-                'Not Bad',
+                'Normal',
                 'Good',
                 'Very Good'
             ],
@@ -420,6 +450,7 @@ $questions = [
             'tr' => 'Düşüncelerinizi bizimle paylaşın',
             'en' => 'Share your thoughts with us',
         ],
-        'options' => []
+        'options' => [],
+        'notRequired' => true
     ]
 ];

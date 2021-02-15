@@ -10,15 +10,15 @@ $language = isset($_GET['language']) && in_array($_GET['language'], $languages) 
 $translate = [
     'header' => [
         'tr' => 'Müşteri Memnuniyeti Formu',
-        'en' => 'Customer Satisfaction Form'
+        'en' => 'Customer Satisfaction Survey'
     ],
     'description' => [
         'tr' => 'Firmamızı ve hizmetlerimizi daha iyi bir noktaya taşıyabilmemiz için sizin düşünceleriniz bizim için çok değerli. Sadece 5 dakikanızı ayırarak aşağıdaki anketimize katılmanız, sizlere çok daha kaliteli hizmet verebilmek için bize ışık tutacaktır.',
-        'en' => 'Firmamızı ve hizmetlerimizi daha iyi bir noktaya taşıyabilmemiz için sizin düşünceleriniz bizim için çok değerli. Sadece 5 dakikanızı ayırarak aşağıdaki anketimize katılmanız, sizlere çok daha kaliteli hizmet verebilmek için bize ışık tutacaktır.'
+        'en' => 'Dear our customer, your opinions are very valuable for us to improve our company and services to a better point. We will be glad if you can take just 5 minutes to provide with you a much higher quality service.'
     ],
     'group1' => [
         'tr' => 'Müşteri Portföyü',
-        'en' => 'Müşteri Portföyü'
+        'en' => 'Customer Portfolio'
     ],
     'group1_footer' => [
         'tr' => 'HADİ BAŞLAYALIM!',
@@ -26,7 +26,7 @@ $translate = [
     ],
     'group2' => [
         'tr' => 'Servis Süreci',
-        'en' => 'Servis Süreci'
+        'en' => 'Service Process'
     ],
     'group2_footer' => [
         'tr' => 'ÇOK AZ KALDI!',
@@ -50,7 +50,7 @@ $translate = [
     ],
     'group5' => [
         'tr' => 'Görüş ve Önerileriniz',
-        'en' => 'Your Comments and Suggestions'
+        'en' => 'Opinions & Suggestions'
     ],
     'submit_button' => [
         'tr' => 'ANKETİ BİTİR VE KAYDET',
@@ -58,11 +58,11 @@ $translate = [
     ],
     'privacy' => [
         'tr' => 'GİZLİLİK BİLDİRİMİ',
-        'en' => 'PRIVACY'
+        'en' => 'PRIVACY STATEMENT'
     ],
     'privacy_detail' => [
         'tr' => 'Değerli müşterimiz/kullanıcımız, kişisel verilerinizin gizliliği ve güvenliği bizim için herşeyden önce gelmektedir. Bu yüzden anketimizde sizden firmamız hakkında değerlendirme bildirimi isterken hiç bir şekilde kişisel bilgilerinizi girmenizi talep etmedik. Amacımız siz değerli müşterilerimiz/kullanıcılarımızın firmamız hakkında düşüncelerini kendimizi geliştirmek için analiz amaçlı kullanmak olduğunu belirtmek isteriz. Bu anket formu uçtan uca 128 Bit şifreleme yapısı ile korunmaktadır.',
-        'en' => 'Değerli müşterimiz/kullanıcımız, kişisel verilerinizin gizliliği ve güvenliği bizim için herşeyden önce gelmektedir. Bu yüzden anketimizde sizden firmamız hakkında değerlendirme bildirimi isterken hiç bir şekilde kişisel bilgilerinizi girmenizi talep etmedik. Amacımız siz değerli müşterilerimiz/kullanıcılarımızın firmamız hakkında düşüncelerini kendimizi geliştirmek için analiz amaçlı kullanmak olduğunu belirtmek isteriz. Bu anket formu uçtan uca 128 Bit şifreleme yapısı ile korunmaktadır.'
+        'en' => 'Dear our customer, Privacy and security of your personal data are very important more than anything for us. In this matter we never request that you enter personal information while filling the survey about our company. Our main purpose is that we will analyze your precious thoughts about how to improve more ourself. This form is protected with end-to-end 128 Bit encryption structure.'
     ],
     'choose' => [
         'tr' => 'Seçiniz',
@@ -70,7 +70,7 @@ $translate = [
     ],
     'success' => [
         'tr' => 'Değerli müşterimiz/kullanıcımız, anketimize katıldığınız için teşekkür ederiz. Ankette belirtmiş olduğunuz cevaplar doğrultusunda, kendimizi geliştirip daha iyi bir hizmet kalitesi için yenileyeceğiz.',
-        'en' => 'Değerli müşterimiz/kullanıcımız, anketimize katıldığınız için teşekkür ederiz. Ankette belirtmiş olduğunuz cevaplar doğrultusunda, kendimizi geliştirip daha iyi bir hizmet kalitesi için yenileyeceğiz.'
+        'en' => 'Thank you for taking the time to complete our form. Hope you to stay safe and healthy.'
     ],
     'fail' => [
         'tr' => 'Teknik bir problem yaşandı. Lütfen daha sonra tekrar deneyin.',
@@ -94,6 +94,7 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
 			body {
 				font-family: 'Roboto', sans-serif;
@@ -116,10 +117,10 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
 				color: #fff!important;
 			}
 			.text-green {
-				color: #2cb742;
+				color: #3579BD;
 			}
 			.background-green {
-				background-color: #2cb742;
+				background-color: #3579BD;
 			}
 			.logo {
 				margin-bottom: 50px;
@@ -195,6 +196,9 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
                 .checkbox-group {
                     font-size: 12px;
                 }
+                .starring {
+                    font-size: 12px;
+                }
 			}
 			.checkbox-group ul {
 				column-count: 2;
@@ -224,6 +228,32 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
             .btn-submit:hover {
                 color: #fff;
             }
+            .starring {
+                margin: auto;
+                min-width: 100px;
+                flex-wrap: wrap;
+                flex-direction: column;
+                padding: 1rem;
+                direction: rtl;
+            }
+            .starring span.fa {
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .starring label {
+                font-weight: 600;
+                color: #ff4a52;
+            }
+            .starring span:hover:before,
+            .starring span:hover~span:before,
+            .starring span.selected:before,
+            .starring span.selected~span:before {
+                color: orange;
+            }
+            .background-red .starring label,
+            .background-green .starring label {
+                color: #fff!important;
+            }
 		</style>
 	</head>
 	<body>
@@ -236,7 +266,7 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
 			<form id="form">
                 <div class="questions-group">
                     <h2 class="text-green font-weight-bold m-3 pt-3"><?=$translate['group1'][$language]?></h2>
-                    <div class="question-row background-green">
+                    <div class="question-row">
                         <div class="flex-center px-1 py-3">
                             <div class="col-xs-12 col-sm-6">
                                 <span><?=$questions[1]['question'][$language]?></span>
@@ -429,72 +459,122 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
                 <div class="questions-group">
                     <h2 class="text-green font-weight-bold m-3 pt-3"><?=$translate['group3'][$language]?></h2>
                     <div class="question-row">
-                        <div class="flex-center px-1 py-3">
-                            <div class="col-xs-12 col-sm-6">
+                        <div class="px-1 py-3">
+                            <div class="col-12">
                                 <span><?=$questions[13]['question'][$language]?></span>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <?php foreach ($questions[13]['options'][$language] as $index => $option) { ?>
-                                    <label class="label-vertical">
-                                        <input type="radio" name="<?=$questions[13]['name']?>" id="<?=$questions[13]['name']?>" value="<?=$option?>"><?=$option?>
-                                    </label>
-                                <?php } ?>
+                            <div class="col-12">
+                                <div class="row mt-3">
+                                    <?php
+                                    foreach ($questions[13]['options'][$language] as $index => $option) {
+                                        echo '<div class="starring flex-center">';
+                                        if (is_array($option)) {
+                                            echo '<label>' . $index . '</label><div>';
+                                            foreach (array_reverse($option) as $subOption) {
+                                                echo '<span class="fa fa-star" data-rate="'.$subOption.'"></span>';
+                                            }
+                                            echo '<input type="hidden" name="'.$questions[13]['name'].'[]" id="'.$questions[13]['name'].'"></div>';
+                                        }
+                                        echo '</div>';
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="question-row">
-                        <div class="flex-center px-1 py-3">
-                            <div class="col-xs-12 col-sm-6">
+                        <div class="px-1 py-3">
+                            <div class="col-12">
                                 <span><?=$questions[14]['question'][$language]?></span>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <?php foreach ($questions[14]['options'][$language] as $index => $option) { ?>
-                                    <label class="label-vertical">
-                                        <input type="radio" name="<?=$questions[14]['name']?>" id="<?=$questions[14]['name']?>" value="<?=$option?>"><?=$option?>
-                                    </label>
-                                <?php } ?>
+                            <div class="col-12">
+                                <div class="row mt-3">
+                                    <?php
+                                    foreach ($questions[14]['options'][$language] as $index => $option) {
+                                        echo '<div class="starring flex-center">';
+                                        if (is_array($option)) {
+                                            echo '<label>' . $index . '</label><div>';
+                                            foreach (array_reverse($option) as $subOption) {
+                                                echo '<span class="fa fa-star" data-rate="'.$subOption.'"></span>';
+                                            }
+                                            echo '<input type="hidden" name="'.$questions[14]['name'].'[]" id="'.$questions[14]['name'].'"></div>';
+                                        }
+                                        echo '</div>';
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="question-row">
-                        <div class="flex-center px-1 py-3">
-                            <div class="col-xs-12 col-sm-6">
+                        <div class="px-1 py-3">
+                            <div class="col-12">
                                 <span><?=$questions[15]['question'][$language]?></span>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <?php foreach ($questions[15]['options'][$language] as $index => $option) { ?>
-                                    <label class="label-vertical">
-                                        <input type="radio" name="<?=$questions[15]['name']?>" id="<?=$questions[15]['name']?>" value="<?=$option?>"><?=$option?>
-                                    </label>
-                                <?php } ?>
+                            <div class="col-12">
+                                <div class="row mt-3">
+                                    <?php
+                                    foreach ($questions[15]['options'][$language] as $index => $option) {
+                                        echo '<div class="starring flex-center">';
+                                        if (is_array($option)) {
+                                            echo '<label>' . $index . '</label><div>';
+                                            foreach (array_reverse($option) as $subOption) {
+                                                echo '<span class="fa fa-star" data-rate="'.$subOption.'"></span>';
+                                            }
+                                            echo '<input type="hidden" name="'.$questions[15]['name'].'[]" id="'.$questions[15]['name'].'"></div>';
+                                        }
+                                        echo '</div>';
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="question-row">
-                        <div class="flex-center px-1 py-3">
-                            <div class="col-xs-12 col-sm-6">
+                        <div class="px-1 py-3">
+                            <div class="col-12">
                                 <span><?=$questions[16]['question'][$language]?></span>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <?php foreach ($questions[16]['options'][$language] as $index => $option) { ?>
-                                    <label class="label-vertical">
-                                        <input type="radio" name="<?=$questions[16]['name']?>" id="<?=$questions[16]['name']?>" value="<?=$option?>"><?=$option?>
-                                    </label>
-                                <?php } ?>
+                            <div class="col-12">
+                                <div class="row mt-3">
+                                    <?php
+                                    foreach ($questions[16]['options'][$language] as $index => $option) {
+                                        echo '<div class="starring flex-center">';
+                                        if (is_array($option)) {
+                                            echo '<label>' . $index . '</label><div>';
+                                            foreach (array_reverse($option) as $subOption) {
+                                                echo '<span class="fa fa-star" data-rate="'.$subOption.'"></span>';
+                                            }
+                                            echo '<input type="hidden" name="'.$questions[16]['name'].'[]" id="'.$questions[16]['name'].'"></div>';
+                                        }
+                                        echo '</div>';
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="question-row">
-                        <div class="flex-center px-1 py-3">
-                            <div class="col-xs-12 col-sm-6">
+                        <div class="px-1 py-3">
+                            <div class="col-12">
                                 <span><?=$questions[17]['question'][$language]?></span>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <?php foreach ($questions[17]['options'][$language] as $index => $option) { ?>
-                                    <label class="label-vertical">
-                                        <input type="radio" name="<?=$questions[17]['name']?>" id="<?=$questions[17]['name']?>" value="<?=$option?>"><?=$option?>
-                                    </label>
-                                <?php } ?>
+                            <div class="col-12">
+                                <div class="row mt-3">
+                                    <?php
+                                    foreach ($questions[17]['options'][$language] as $index => $option) {
+                                        echo '<div class="starring flex-center">';
+                                        if (is_array($option)) {
+                                            echo '<label>' . $index . '</label><div>';
+                                            foreach (array_reverse($option) as $subOption) {
+                                                echo '<span class="fa fa-star" data-rate="'.$subOption.'"></span>';
+                                            }
+                                            echo '<input type="hidden" name="'.$questions[17]['name'].'[]" id="'.$questions[17]['name'].'"></div>';
+                                        }
+                                        echo '</div>';
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -548,17 +628,45 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script>
+        var questions = JSON.parse('<?=json_encode($questions)?>');
+        // $('input, select, textarea').change(function() {
+        //     if (!$(this).hasClass('filled')) {
+        //         $(this).parents('.question-row').removeClass('background-green background-red').addClass('filled');
+        //         var notFilledQuestions = $('.question-row:not(.filled)');
+        //         if (notFilledQuestions.length) {
+        //             $(notFilledQuestions[0]).addClass('background-green');
+        //         }
+        //     }
+        // });
+        // $('.fa').click(function() {
+        //     var rate = $(this).data('rate');
+        //     var rateInput = $(this).siblings('input[type="hidden"]');
+        //     $(this).siblings('span.fa').removeClass().addClass('fa fa-star');
+        //     $(this).addClass('selected');
+        //     rateInput.val(rate);
+        //     var formValues = $('#form').serializeArray();
+        //     if (formValues.findIndex(function(item) {
+        //         return item.name === rateInput.attr('name') && !item.value
+        //     }) === -1) {
+        //         if (!$(this).hasClass('filled')) {
+        //             $(this).parents('.question-row').removeClass('background-green background-red').addClass('filled');
+        //             var notFilledQuestions = $('.question-row:not(.filled)');
+        //             if (notFilledQuestions.length) {
+        //                 $(notFilledQuestions[0]).addClass('background-green');
+        //             }
+        //         }
+        //     }
+        // });
         $('input, select, textarea').change(function() {
-            if (!$(this).hasClass('filled')) {
-                $(this).parents('.question-row').removeClass('background-green background-red').addClass('filled');
-                var notFilledQuestions = $('.question-row:not(.filled)');
-                if (notFilledQuestions.length) {
-                    $(notFilledQuestions[0]).addClass('background-green');
-                    // $('html,body').animate({
-                    //     scrollTop: $(notFilledQuestions[0]).offset().top
-                    // }, 'slow');
-                }
-            }
+            $(this).parents('.question-row').removeClass('background-green background-red');
+        });
+        $('.fa').click(function() {
+            var rate = $(this).data('rate');
+            var rateInput = $(this).siblings('input[type="hidden"]');
+            $(this).siblings('span.fa').removeClass().addClass('fa fa-star');
+            $(this).addClass('selected');
+            rateInput.val(rate);
+            $(this).parents('.question-row').removeClass('background-green background-red');
         });
         $('#form').on('submit',(function(e) {
             e.preventDefault();
@@ -567,7 +675,7 @@ $csrfToken = $_SESSION[$app['name'].'Token'];
                 var questionRowOfQuestion = $('#question_' + (i + 1)).parents('.question-row');
                 if (formValues.findIndex(function(item) {
                     return (item.name === 'question_' + (i + 1) || item.name === 'question_' + (i + 1) + '[]') && item.value
-                }) === -1) {
+                }) === -1 && !questions[i + 1].notRequired) {
                     $('.question-row').each(function() {
                         $(this).removeClass('background-green background-red');
                     });

@@ -117,67 +117,55 @@ function result($code, $message = '') {
     return json_encode($response);
 }
 
-function userAgentNormalizer() {
-    $u_agent = $_SERVER['HTTP_USER_AGENT'];
-    $bname = 'Unknown';
-    $platform = 'Unknown';
-    $version= "";
-
-    if (preg_match('/linux/i', $u_agent)) {
-        $platform = 'linux';
-    } else if (preg_match('/macintosh|mac os x/i', $u_agent)) {
-        $platform = 'mac';
-    } else if (preg_match('/windows|win32/i', $u_agent)) {
-        $platform = 'windows';
-    }
-    if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent)) {
-        $bname = 'Internet Explorer';
-        $ub = "MSIE";
-    } else if(preg_match('/Firefox/i',$u_agent)) {
-        $bname = 'Mozilla Firefox';
-        $ub = "Firefox";
-    } else if(preg_match('/Chrome/i',$u_agent)) {
-        $bname = 'Google Chrome';
-        $ub = "Chrome";
-    } else if(preg_match('/Safari/i',$u_agent)) {
-        $bname = 'Apple Safari';
-        $ub = "Safari";
-    } else if(preg_match('/Opera/i',$u_agent)) {
-        $bname = 'Opera';
-        $ub = "Opera";
-    } else if(preg_match('/Netscape/i',$u_agent)) {
-        $bname = 'Netscape';
-        $ub = "Netscape";
-    }
-
-    $known = array('Version', $ub, 'other');
-    $pattern = '#(?<browser>' . join('|', $known) .
-        ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
-
-    if (!preg_match_all($pattern, $u_agent, $matches)) {}
-
-    $i = count($matches['browser']);
-
-    if ($i != 1) {
-        if (strripos($u_agent,"Version") < strripos($u_agent, $ub)){
-            $version= $matches['version'][0];
-        } else {
-            $version = $matches['version'][1];
+function systemInfo($userAgent) {
+    $os = '';
+    $osList = array(
+        '/windows phone 8/i' => 'Windows Phone 8',
+        '/windows phone os 7/i' => 'Windows Phone 7',
+        '/win/i' => 'Windows',
+        '/macintosh|mac os x/i' => 'Mac OS X',
+        '/mac_powerpc/i' => 'Mac OS 9',
+        '/linux/i' => 'Linux',
+        '/ubuntu/i' => 'Ubuntu',
+        '/iphone/i' => 'iPhone',
+        '/ipod/i' => 'iPod',
+        '/ipad/i' => 'iPad',
+        '/android/i' => 'Android',
+        '/blackberry/i' => 'BlackBerry',
+        '/webos/i' => 'Mobile'
+    );
+    $browser = '';
+    $browserList = array(
+        '/msie/i' => 'Internet Explorer',
+        '/firefox/i' => 'Firefox',
+        '/safari/i' => 'Safari',
+        '/chrome/i' => 'Chrome',
+        '/opera/i' => 'Opera',
+        '/netscape/i' => 'Netscape',
+        '/maxthon/i' => 'Maxthon',
+        '/konqueror/i' => 'Konqueror',
+        '/mobile/i' => 'Mobile Browser'
+    );
+    $foundOs = false;
+    foreach ($osList as $regex => $value) {
+        if ($foundOs) {
+            break;
+        } else if (preg_match($regex, $userAgent)) {
+            $os = $value;
+            $foundOs = true;
         }
-    } else {
-        $version = $matches['version'][0];
     }
-
-    if ($version == null || $version == "") {
-        $version = "?";
+    $foundBrowser = false;
+    foreach ($browserList as $regex => $value) {
+        if ($foundBrowser) {
+            break;
+        } else if (preg_match($regex, $userAgent)) {
+            $browser = $value;
+        }
     }
-
     return array(
-        'userAgent' => $u_agent,
-        'name' => $bname,
-        'version' => $version,
-        'platform' => $platform,
-        'pattern' => $pattern
+        'os' => $os,
+        'browser' => $browser
     );
 }
 
@@ -193,8 +181,8 @@ function sendMail($email, $message, $subject, $app)
     $mail->addAddress($email);
     $mail->Username = "info@aybarsakgun.com";
     $mail->Password = "09052013.Ba";
-    $mail->setFrom('info@aybarsakgun.com', $app['name']);
-    $mail->addReplyTo("info@aybarsakgun.com", $app['name']);
+    $mail->setFrom('info@aybarsakgun.com', $app['siteName']);
+    $mail->addReplyTo("info@aybarsakgun.com", $app['siteName']);
     $mail->Subject = $subject;
     $mail->CharSet = "UTF-8";
     $mail->msgHTML($message);

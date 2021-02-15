@@ -34,19 +34,28 @@ foreach ($postedValues as $key => $value) {
     $questionNumber = explode('_', $key)[1];
 
     if (!isset($questionNumber) || !($questionNumber > 0 && $questionNumber < 20)) {
-        die(result(400, 'Security'));
+        die(result(400, 'Security1'));
     }
 
     if ($questions[$questionNumber]['type'] !== 'textarea') {
         if (!is_array($value)) {
             if (!in_array($value, $questions[$questionNumber]['options'][$_GET['language']])) {
-                die(result(400, 'Security'));
+                die(result(400, 'Security2'));
             }
         } else {
             foreach ($value as $val) {
-                if (!in_array($val, $questions[$questionNumber]['options'][$_GET['language']])) {
-                    die(result(400, 'Security'));
+                if ($questions[$questionNumber]['type'] !== 'starring') {
+                    if (!in_array($val, $questions[$questionNumber]['options'][$_GET['language']])) {
+                        die(result(400, 'Security3'));
+                    }
+                } else {
+                    foreach ($questions[$questionNumber]['options'][$_GET['language']] as $key => $option) {
+                        if ($val && !in_array($val, $option)) {
+                            die(result(400, 'Security4 ' . $val . ' ' . implode(',', $option)));
+                        }
+                    }
                 }
+
             }
         }
     } else {

@@ -153,7 +153,7 @@ if(isset($pageRequest))
                     <thead>
                     <tr>
                         <th>IP Adresi</th>
-                        <th>Tarayıcı</th>
+                        <th>Sistem Bilgileri</th>
                         <th class="visible-sm visible-md visible-lg">Tarih</th>
                         <th class="visible-sm visible-md visible-lg">Durum</th>
                     </tr>
@@ -164,18 +164,19 @@ if(isset($pageRequest))
                     {
                         while($fetch = $query->fetch(PDO::FETCH_ASSOC))
                         {
+                            $systemInfo = systemInfo($fetch['browser']);
                             ?>
                             <tr>
                                 <td><?=$fetch["ip_address"]?></td>
                                 <td>
-                                    <span><?=$fetch["browser"]?></span>
+                                    <span><?=$systemInfo['os'] . ' / ' . $systemInfo['browser']?></span>
                                     <div class="visible-xs">
-                                        <strong>Tarih:</strong> <?=date('d.m.Y h:i:s', strtotime($fetch["date"]))?><br>
+                                        <strong>Tarih:</strong> <?=date('d.m.Y H:i:s', strtotime($fetch["date"]))?><br>
                                         <strong>Durum:</strong><br>
                                         <?php if($fetch["status"] == "0") { ?><span class="label label-danger">Başarısız</span><?php } else if($fetch["status"] == "1") { ?><span class="label label-success">Başarılı</span><?php } ?>
                                     </div>
                                 </td>
-                                <td class="visible-sm visible-md visible-lg"><?=date('d.m.Y h:i:s', strtotime($fetch["date"]))?></td>
+                                <td class="visible-sm visible-md visible-lg"><?=date('d.m.Y H:i:s', strtotime($fetch["date"]))?></td>
                                 <td class="visible-sm visible-md visible-lg"><?php if($fetch["status"] == "0") { ?><span class="label label-danger">Başarısız</span><?php } else if($fetch["status"] == "1") { ?><span class="label label-success">Başarılı</span><?php } ?></td>
                             </tr>
                             <?php
@@ -345,18 +346,19 @@ if(isset($pageRequest))
                 {
                     while($fetch = $query->fetch(PDO::FETCH_ASSOC))
                     {
+                        $systemInfo = systemInfo($fetch['user_agent']);
                         ?>
                         <tr>
                             <td><?=$fetch["ip_address"]?></td>
                             <td>
-                                <span><?=$fetch["user_agent"]?></span>
+                                <span><?=$systemInfo['os'] . ' / ' . $systemInfo['browser']?></span>
                                 <div class="visible-xs">
-                                    <strong>Tarih:</strong> <?=date('d.m.Y h:i:s', strtotime($fetch["date"]))?><br>
-                                    <a href="#" class="label label-success showAnswersButton" data-toggle="modal" data-target="#answersModal" data-language="<?=$fetch['language']?>" data-answers="<?=$fetch['answers']?>">Cevaplar</a>
+                                    <strong>Tarih:</strong> <?=date('d.m.Y H:i:s', strtotime($fetch["date"]))?><br>
+                                    <a href="#" class="label label-success showAnswersButton" data-toggle="modal" data-target="#answersModal" data-language="<?=$fetch['language']?>" data-answers="<?=$fetch['answers']?>" <?php if ($fetch['language'] == 'en') { ?> style="background-color: #3579BD" <?php } ?>><?=$fetch['language'] == 'en' ? 'Answers' : 'Cevaplar'?></a>
                                 </div>
                             </td>
-                            <td class="visible-sm visible-md visible-lg"><?=date('d.m.Y h:i:s', strtotime($fetch["date"]))?></td>
-                            <td class="visible-sm visible-md visible-lg"><a href="#" class="label label-success showAnswersButton" data-toggle="modal" data-target="#answersModal" data-language="<?=$fetch['language']?>" data-answers="<?=$fetch['answers']?>">Cevaplar</a></td>
+                            <td class="visible-sm visible-md visible-lg"><?=date('d.m.Y H:i:s', strtotime($fetch["date"]))?></td>
+                            <td class="visible-sm visible-md visible-lg"><a href="#" class="label label-success showAnswersButton" data-toggle="modal" data-target="#answersModal" data-language="<?=$fetch['language']?>" data-answers="<?=$fetch['answers']?>" <?php if ($fetch['language'] == 'en') { ?> style="background-color: #3579BD" <?php } ?>><?=$fetch['language'] == 'en' ? 'Answers' : 'Cevaplar'?></a></td>
                         </tr>
                         <?php
                     }
@@ -433,11 +435,11 @@ if(isset($pageRequest))
             die(result(400, 'Lütfen geçerli bir e-posta adresi giriniz.'));
         }
         if ($language == 'tr') {
-            $message = 'Anket Linki: ' . $app['url'] . 'anket';
-            $subject = 'Anket Linki';
+            $message = '<h1>Müşteri Memnuniyeti Formu</h1><p>Firmamızı ve hizmetlerimizi daha iyi bir noktaya taşıyabilmemiz için sizin düşünceleriniz bizim için çok değerli. Sadece 5 dakikanızı ayırarak aşağıdaki anketimize katılmanız, sizlere çok daha kaliteli hizmet verebilmek için bize ışık tutacaktır.<br><br>Anket: '.$app['url'] . 'anket</p>';
+            $subject = 'Müşteri Memnuniyeti Formu';
         } else {
-            $message = 'Poll Link: ' . $app['url'] . 'poll';
-            $subject = 'Poll Link';
+            $message = '<h1>Customer Satisfaction Survey</h1><p>Dear our customer, your opinions are very valuable for us to improve our company and services to a better point. We will be glad if you can take just 5 minutes to provide with you a much higher quality service.<br><br>Survey: '.$app['url'] . 'poll</p>';
+            $subject = 'Customer Satisfaction Survey';
         }
         if (sendMail($email, $message, $subject, $app)) {
             die(result(200));
@@ -485,8 +487,16 @@ if(isset($pageRequest))
                 echo '<tr>';
                 foreach($answer as $k => $v) {
                     if ($k === 'answers') {
-                        foreach (explode('|||', $answer[$k]) as $question) {
-                            echo '<td>' . $question . '</td>';
+                        foreach (explode('|||', $answer[$k]) as $key => $parsedAnswer) {
+                            if ($questions[$key + 1]['type'] == 'starring') {
+                                echo '<td>';
+                                foreach (explode(',', $parsedAnswer) as $index => $subOption) {
+                                    echo array_keys($questions[$key + 1]['options'][$language])[$index] . ': ' . ($subOption != '' ? ($subOption . ($language == 'tr' ? ' Yıldız' : ' Star')) : '-') . '<br>';
+                                }
+                                echo '</td>';
+                            } else {
+                                echo '<td>' . $parsedAnswer . '</td>';
+                            }
                         }
                     } else {
                         echo '<td>' . $v . '</td>';
@@ -505,6 +515,8 @@ if(isset($pageRequest))
 
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename='. $fileName);
+
+        echo "\xEF\xBB\xBF";
 
         $answers = $DB_con->prepare('SELECT id, date, ip_address, answers FROM poll_answers WHERE language = :language');
 
@@ -530,8 +542,16 @@ if(isset($pageRequest))
             $row = [];
             foreach($answer as $k => $v) {
                 if ($k === 'answers') {
-                    foreach (explode('|||', $v) as $question) {
-                        $row[] = $question;
+                    foreach (explode('|||', $v) as $key => $parsedAnswer) {
+                        if ($questions[$key + 1]['type'] == 'starring') {
+                            $subOptions = [];
+                            foreach (explode(',', $parsedAnswer) as $index => $subOption) {
+                                $subOptions[] = array_keys($questions[$key + 1]['options'][$language])[$index] . ': ' . ($subOption != '' ? ($subOption . ($language == 'tr' ? ' Yıldız' : ' Star')) : '-');
+                            }
+                            $row[] = implode(' , ', $subOptions);
+                        } else {
+                            $row[] = $parsedAnswer;
+                        }
                     }
                 } else {
                     $row[] = $v;
